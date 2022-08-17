@@ -1,0 +1,15 @@
+header {
+  width: 100%;
+  padding-top: 120px;
+  height: 520px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #D89820;
+  background-image: url("../images/3px-tile.png");
+}
+
+.proname {
+  margin: 0px;
+}

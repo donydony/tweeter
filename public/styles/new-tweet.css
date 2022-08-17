@@ -1,0 +1,25 @@
+.new-tweet {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.new-tweet h2 {
+  text-align: center;
+}
+
+#tweet-text {
+  width: 100%;
+  background-color: inherit;
+  border-bottom-color: black;
+  border-bottom-width: 5px;
+  border-top: none;
+  border-left: none; 
+  border-right: none;
+  resize: none;
+}
+.button-count {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

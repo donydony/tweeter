@@ -1,0 +1,38 @@
+nav {
+  height: 120px;
+  background-color: #4056A1;
+  width: 100%;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  padding-top: 1.5em;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex: 4;
+  position: fixed;
+}
+
+nav h3 {
+  font-family: 'Bungee', cursive;
+  margin: 0px;
+  padding: 0px;
+  color: white;
+  display: flex;
+ }
+
+ .write {
+  color: white;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+ }
+
+.navText {
+  display: flex;
+}
+
+ .arrow {
+  display: flex;
+  justify-content: center;
+ }
