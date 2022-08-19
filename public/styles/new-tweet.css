@@ -23,3 +23,14 @@
   flex-direction: row;
   justify-content: space-between;
 }
+section.new-tweet form button {
+  background-color: #4055A1;
+  color: white;
+  border: none;
+  font-family: 'Bungee', cursive;
+  padding: 6px 15px 6px 15px;
+}
+
+section.new-tweet form button:hover {
+  background-color: #D89820;
+}
