@@ -18,11 +18,17 @@
   border-right: none;
   resize: none;
 }
+
+#tweet-text:focus {
+  outline: none;
+}
+
 .button-count {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 section.new-tweet form button {
   background-color: #4055A1;
   color: white;
@@ -33,4 +39,10 @@ section.new-tweet form button {
 
 section.new-tweet form button:hover {
   background-color: #D89820;
+}
+
+.errors {
+  color: red;
+  display: flex;
+  justify-content: center;
 }

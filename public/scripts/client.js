@@ -4,26 +4,33 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const createTweetElement = function(data) {
-  const dayDiff = Math.floor((Date.now() - data.created_at) / (24 * 3600 * 1000));
+const escapeXSS = function(str) {
+  let div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
+const createTweetElement = function (data) {
+  // const dayDiff = Math.floor((Date.now() - data.created_at) / (24 * 3600 * 1000));
+  const time = timeago.format(data.created_at, 'en_US');
   let $tweet = `<article class="tweet">
   <header>
     <div class="tweet-profile">
-      <img src="${data.user.avatars}" alt="Profile pic">
+      <img src="${escapeXSS(data.user.avatars)}" alt="Profile pic">
       <label id="username">
-        ${data.user.name}
+        ${escapeXSS(data.user.name)}
       </label>
     </div>
     <label class="handle">
-      ${data.user.handle}
+      ${escapeXSS(data.user.handle)}
     </label>
   </header>
   <p>
-    ${data.content.text}
+    ${escapeXSS(data.content.text)}
   </p>
   <footer>
     <label class="date-ago">
-      ${dayDiff} days ago
+      ${time}
     </label>
     <div class="tweet-buttons">
       <i class="fa-solid fa-flag"></i>
@@ -35,37 +42,44 @@ const createTweetElement = function(data) {
   return $tweet;
 };
 
-const renderTweets = function(arr) {
+const renderTweets = function (arr) {
   for (let t of arr) {
-    $('#tweets-container').append(createTweetElement(t));
+    $('#tweets-container').prepend(createTweetElement(t));
   }
 };
 
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-];
+$(document).ready(function () {
+  const loadTweets = function () {
+    $.ajax('/tweets/', { method: 'GET' })
+      .then((result) => {
+        renderTweets(result);
+      }).catch((err) => {
+        console.log(err);
+      });
+  };
 
-$(document).ready(function() {
-  renderTweets(data);
+  loadTweets();
+
+  $('#submit-tweet').on("submit", function (event) {
+    event.preventDefault();
+    if ($('#tweet-text')[0].value.length === 0) {
+      $('#errors').empty();
+      $('#errors').append("Empty Tweet!").hide();
+      $('#errors').slideDown("slow");
+    } else if ($('#tweet-text')[0].value.length > 140) {
+      $('#errors').empty();
+      $('#errors').append("Tweet is over 140 chars!").hide();
+      $('#errors').slideDown("slow");
+    } else {
+      const formData = $(this).serialize();
+      console.log('Form submitted, performing ajax call...');
+      $.ajax('/tweets/', { method: 'POST', data: formData })
+        .then((result) => {
+          console.log('Success: ', result);
+          $('#tweets-container').empty();
+          $('#errors').empty();
+          loadTweets();
+        });
+    }
+  });
 });
