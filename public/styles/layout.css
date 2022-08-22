@@ -20,8 +20,8 @@ body {
   font-size: 24px;
   font-family: 'Source Sans Pro', sans-serif;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: row;
 }
 
 /*
@@ -33,4 +33,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 120px;
  }
+
+ @media only screen and (max-width: 1024px) {
+  body {
+    flex-direction: column;
+    width: 100%;
+  }
+  nav {
+    background-color: #D89820 !important;
+    background-image: url("../images/3px-tile.png");
+  }
+  header.current-user {
+    width: 100% !important;
+    margin: 0px;
+  }
+}
