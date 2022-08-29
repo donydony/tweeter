@@ -20,7 +20,6 @@ body {
   font-size: 24px;
   font-family: 'Source Sans Pro', sans-serif;
   display: flex;
-  align-items: center;
   flex-direction: row;
 }
 
@@ -40,6 +39,7 @@ body {
   body {
     flex-direction: column;
     width: 100%;
+    align-items: center;
   }
   nav {
     background-color: #D89820 !important;
@@ -47,6 +47,6 @@ body {
   }
   header.current-user {
     width: 100% !important;
-    margin: 0px;
+    margin: 0px !important;
   }
 }
